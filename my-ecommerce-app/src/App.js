@@ -1,21 +1,7 @@
-// App.js
-/*
-import React from 'react';
-import Homepage from './components/Homepage'; 
-
-function App() {
-  return (
-    <div>
-      <Homepage />
-    </div>
-  );
-}
-
-export default App;*/
-
 import React from 'react';
 import Homepage from './components/Homepage'; 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Productpage from './components/Productpage';
 
 function App() {
     return (
@@ -23,7 +9,7 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<Homepage />} />
-                    <Route path="/products" element={<Homepage/>} />
+                    <Route path="/products" element={<Productpage/>} />
                 </Routes>
             </div>
         </Router>
