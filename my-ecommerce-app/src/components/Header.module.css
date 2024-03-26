@@ -1,0 +1,17 @@
+.logo{
+    width: 75px;
+    height: auto;
+}
+
+.headerContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navList{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+}
