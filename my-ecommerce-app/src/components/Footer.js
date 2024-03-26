@@ -4,7 +4,7 @@ import styles from './Footer.css';
 function Footer() {
   return (
     <footer className={styles.footer}>
-      <p>© 2024 Quereshi Innovations Ltd. All rights reserved.</p>
+      <p>© 2024 Qureshi Innovations Ltd. All rights reserved.</p>
     </footer>
   );
 }

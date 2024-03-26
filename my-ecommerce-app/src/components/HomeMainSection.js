@@ -1,6 +1,7 @@
 // HomeMainSection.js
 import React, { useState, useEffect } from 'react';
 import reviews from '../data/reviews';
+import { Link } from 'react-router-dom';
 
 function HomeMainSection() {
   const [randomReviews, setRandomReviews] = useState([]);
@@ -20,7 +21,9 @@ function HomeMainSection() {
       <section>
         <h2>About Us</h2>
         <p>Welcome to our online store! We are passionate about providing high-quality products and exceptional customer service. Learn more about our story and commitment to your satisfaction</p>
-        <button onClick={() => console.log('Shop Now button clicked')}>Shop Now</button>
+        <Link to="/products">
+                    <button className="shop-now-button">Shop Now</button>
+        </Link>
       </section>
 
       <section>
