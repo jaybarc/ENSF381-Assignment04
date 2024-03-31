@@ -17,7 +17,7 @@ function Header() {
       <nav className={styles.navList}>
         <Link to="/" className={styles.navItem}>Home</Link>
         <Link to="/products" className={styles.navItem}>Products</Link>
-        <Link to="/" className={styles.navItem}>Login</Link>
+        <Link to="/login" className={styles.navItem}>Login</Link>
       </nav>
       
     
