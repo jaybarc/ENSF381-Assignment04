@@ -1,33 +1,45 @@
 import React, { useState } from 'react';
 
 function LoginForm() {
-    const [username, changeUsername] = useState('');
-    const [password, changePassword] = useState('');
-    const [error, setError] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-    const login = (e) => {
+
+    const login = async (e) => {
         e.preventDefault();
 
-        if (username.trim() === '' || password.trim() === '') {
-            setError(true);
+        try {
+            const response = await fetch('http://127.0.0.1:5000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            });
+
+            if (response.ok) {
+                console.log('Login successful');
+                window.location.href = '/products';
+
+            } else {
+                const data = await response.json();
+                setError(data.error || 'Failed to login');
+            }
+        } catch (error) {
+            console.error('Error logging in:', error);
+            setError('Failed to login');
         }
-        else {
-
-            // Place successful login logic here:
-
-            // Resetting form fields if there is a successful submission
-            setError(false);
-            changeUsername('');
-            changePassword(''); 
-        }
-
     };
 
     return (
         <div>
             <h2>Login</h2>
             
-            {error && <p style={{ color: 'red' }}>Please fill out both fields!</p>}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
 
             <form onSubmit={login}>
                 <div>
@@ -37,8 +49,7 @@ function LoginForm() {
                         id="username"
                         placeholder='Enter your username'
                         value={username}
-                        onChange={(e) => changeUsername(e.target.value)}
-                        
+                        onChange={(e) => setUsername(e.target.value)}
                     />
 
                 </div>
@@ -50,8 +61,7 @@ function LoginForm() {
                         id="password"
                         placeholder="Enter your password"
                         value={password}
-                        onChange={(e) => changePassword(e.target.value)}
-                        
+                        onChange={(e) => setPassword(e.target.value)}
                     />
 
                 </div>
@@ -63,6 +73,6 @@ function LoginForm() {
         </div>
 
     );
-};
+}
 
 export default LoginForm;
