@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 function SignupForm() {
     const [username, setUser] = useState('');
     const [password, setPassword] = useState('');
@@ -8,33 +7,46 @@ function SignupForm() {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
 
-    const handleSignup = (e) => {
-
+    const handleSignup = async (e) => {
         e.preventDefault();
 
-        // Check if any field is empty
         if (!username || !password || !confirmPassword || !email) {
             setError('All fields are required!');
             return;
         }
 
-        // Check if passwords match
         if (password !== confirmPassword) {
             setError('Passwords do not match!');
             return;
         }
 
-        // Place successful signup logic here:
+        try {
+            const response = await fetch('http://127.0.0.1:5000/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                    email: email
+                })
+            });
 
-        // Reseting error and form fields after a successful signup
-        setError('User signed up successfully!');
-        setUser('');
-        setPassword('');
-        setConfirmPassword('');
-        setEmail('');
-
+            if (response.ok) {
+                setError('User signed up successfully!');
+                setUser('');
+                setPassword('');
+                setConfirmPassword('');
+                setEmail('');
+            } else {
+                setError('Username exists already.');
+            }
+        } catch (error) {
+            console.error('Error signing up:', error);
+            setError('Failed to sign up user, server issue');
+        }
     };
-
 
     return (
         <div>
@@ -51,9 +63,7 @@ function SignupForm() {
                         placeholder="Enter your username"
                         value={username}
                         onChange={(e) => setUser(e.target.value)}
-                        
                     />
-
                 </div>
 
                 <div>
@@ -64,9 +74,7 @@ function SignupForm() {
                         placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        
                     />
-
                 </div>
 
                 <div>
@@ -77,9 +85,7 @@ function SignupForm() {
                         placeholder="Confirm your password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        
                     />
-
                 </div>
                 
                 <div>
@@ -90,16 +96,14 @@ function SignupForm() {
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        
                     />
-
                 </div>
 
                 <button type="submit">Signup</button>
-
             </form>
         </div>
     );
 }
 
 export default SignupForm;
+
