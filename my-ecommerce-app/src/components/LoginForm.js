@@ -25,13 +25,11 @@ function LoginForm() {
             });
 
             if (response.ok) {
-                console.log('Login successful');
-                console.log('b4 isauth var =', isAuthenticated());
+                console.log('DEBUGGING b4 isauth var =', isAuthenticated());
                 login();
-                console.log('aft isauth var =', isAuthenticated());
+                console.log('Debugging:aft isauth var =', isAuthenticated());
 
                            
-
             } else {
                 const data = await response.json();
                 setError(data.error || 'Failed to login');
