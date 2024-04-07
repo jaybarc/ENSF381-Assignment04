@@ -4,6 +4,8 @@ import ProductList from './ProductList';
 import Cart from './Cart';
 import Footer from './Footer';
 import "./productpage.css";
+import { isAuthenticated } from './auth';
+import LoginPage from './LoginPage';
 
 const ProductPage = () => {
   // State for cart items
@@ -52,16 +54,22 @@ const ProductPage = () => {
 
   return (
     <div className="product-page">
-      <Header />
-      <table>
-        <tbody>
-          <tr classname="table-row">
-            <td><ProductList addToCart={addToCart} /></td>
-            <td style={{ verticalAlign: 'top' }}><Cart cartItems={cartItems} onRemove={onRemove} /></td>
-          </tr>
-        </tbody>
-      </table>
-      <Footer />
+      { isAuthenticated() ? (
+        <>
+          <Header />
+          <table>
+            <tbody>
+              <tr classname="table-row">
+                <td><ProductList addToCart={addToCart} /></td>
+                <td style={{ verticalAlign: 'top' }}><Cart cartItems={cartItems} onRemove={onRemove} /></td>
+              </tr>
+            </tbody>
+          </table>
+          <Footer />
+        </>
+      ) : (
+        <LoginPage />
+      )}
     </div>
   );
 }

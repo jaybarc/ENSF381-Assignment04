@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { isAuthenticated, login } from './auth';
 
 
+
+
 function LoginForm() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -27,7 +29,6 @@ function LoginForm() {
                 console.log('b4 isauth var =', isAuthenticated());
                 login();
                 console.log('aft isauth var =', isAuthenticated());
-                /*window.location.href = '/products';*/
 
                            
 
@@ -76,7 +77,6 @@ function LoginForm() {
                 <button type="submit">Login</button>
 
             </form>
-
         </div>
 
     );

@@ -1,9 +1,8 @@
 import React from 'react';
 import Homepage from './components/Homepage'; 
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Productpage from './components/Productpage';
 import LoginPage from './components/LoginPage';
-import { isAuthenticated } from './components/auth';
 
 function App() {
     return (
@@ -11,7 +10,7 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<Homepage />} />
-                    <Route path="/products" element={isAuthenticated()? <Productpage /> : <Navigate to="/login" replace />} />
+                    <Route path="/products" element={<Productpage />} />
                     <Route path="/login" element={<LoginPage />} />
                 </Routes>
             </div>
